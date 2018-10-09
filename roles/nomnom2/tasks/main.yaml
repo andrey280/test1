@@ -3,5 +3,16 @@
     state: present
     name: nginx
 
-    
+- template:
+        src: status.txt.j2
+        dest: /etc/nginx/status.txt
+
+- template:
+        src: nomnom.conf.j2
+        dest: /etc/nginx/conf.d/nomnom.conf
+
+- name: start nginx
+  shell: nginx
+
+   
     
