@@ -1,0 +1,43 @@
+---
+- package:
+    state: present
+    name: docker, python-pip
+
+- service:
+    name: docker
+    state: started
+    enabled: yes
+
+- docker_container:
+    name: ssh.pool-1.1.1
+    image: jdeathe/centos-ssh:centos-7
+    ports:
+      "2020:22"
+            
+- name: get_username
+  shell: docker logs ssh.pool-1.1.1|grep "user :"|awk '{print $3}'
+  register: docker_username
+  
+- name: get_password
+  shell: docker logs ssh.pool-1.1.1|grep "password :"|awk '{print $3}'
+  register: docker_password
+
+- debug:
+    msg: "{{docker_username.stdout_lines.0}}"
+    
+- debug:
+    msg: "{{docker_password.stdout_lines.0}}"
+
+#- file:
+#    path: /etc/ansible/hosts
+#    state: directory
+        
+- name: create docker host file
+  shell: echo "nomnom ansible_host=127.0.0.1 ansible_port=2020 ansible_user={{docker_username.stdout_lines.0}} ansible_ssh_password={{docker_password.stdout_lines.0}} ansible_sudo_pass={{docker_password.stdout_lines.0}}" > /etc/ansible/hosts
+
+- name: nomnom2
+  shell: ansible-playbook /etc/ansible/playbooks/nomnom2.yml
+    
+
+    
+    

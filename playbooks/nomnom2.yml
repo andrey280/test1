@@ -1,0 +1,10 @@
+---
+- name: nomnom
+  hosts: nomnom
+  remote_user: root
+  become: yes
+
+
+  roles:
+    - nomnom2
+

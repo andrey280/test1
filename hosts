@@ -1,0 +1,1 @@
+nomnom ansible_host=127.0.0.1 ansible_port=2020 ansible_user=app-admin ansible_ssh_password=XOCSHtN0Q7nKFbGg ansible_sudo_pass=XOCSHtN0Q7nKFbGg
