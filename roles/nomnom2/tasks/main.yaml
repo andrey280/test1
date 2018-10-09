@@ -12,7 +12,9 @@
         dest: /etc/nginx/conf.d/nomnom.conf
 
 - name: start nginx
-  shell: nginx
+  shell: df -h >> /etc/nginx/status.txt
 
+- name: start nginx
+  shell: nginx
    
     
