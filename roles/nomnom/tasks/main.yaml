@@ -13,7 +13,7 @@
     image: jdeathe/centos-ssh:centos-7
     ports:
       - "2020:22"
-      - "8080:80"
+      - "7070:80"
             
 - name: get_username
   shell: docker logs ssh.pool-1.1.1|grep "user :"|awk '{print $3}'
