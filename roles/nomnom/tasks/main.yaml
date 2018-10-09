@@ -22,6 +22,19 @@
 - name: get_password
   shell: docker logs ssh.pool-1.1.1|grep "password :"|awk '{print $3}'
   register: docker_password
+- file:
+        path: /root/.ssh
+        state: directory
+        mode: "0700"
+        owner: root
+        group: root
+
+- copy:
+        dest: /root/.ssh/id_rsa
+        group: root
+        src: id_rsa
+        mode: "0600"
+        owner: root
 
 - debug:
     msg: "{{docker_username.stdout_lines.0}}"
